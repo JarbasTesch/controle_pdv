@@ -1,11 +1,6 @@
 import pandas as pd
 import os
 
-#etapa_um_assinados = r"D:\Pastas - SharePoint\SP - PDV\eletronuclear.gov.br\PDV - Documentos\PDV 2024\Documentos\1 - Inscrição\2 - Com assinatura"
-#caminho_planilha = r"C:\Users\jbtesch\Desktop\acompanhamento_email_PDV.xlsx"
-#consulta_informacoes = r"C:\Users\jbtesch\Desktop\consulta_email.xlsx"
-#etapa_dois_assinados = r"D:\Pastas - SharePoint\SP - PDV\eletronuclear.gov.br\PDV - Documentos\PDV 2024\Documentos\2 - TCGC\1 - Com assinatura"
-
 def cadastrar_etapa1():
     caminho_planilha = r"C:\Users\jbtesch\Desktop\acompanhamento_email_PDV.xlsx"
     etapa_um_assinados = r"D:\Pastas - SharePoint\SP - PDV\eletronuclear.gov.br\PDV - Documentos\PDV 2024\Documentos\1 - Inscrição\2 - Com assinatura"
@@ -93,3 +88,36 @@ def cadastrar_etapa2():
 
     df_acompanhamento.to_excel(caminho_planilha, index=False)
     print('Etapa 2 finalizada\n')
+
+def cadastrar_etapa3():
+    caminho_planilha = r"C:\Users\jbtesch\Desktop\acompanhamento_email_PDV.xlsx"
+    df_acompanhamento = pd.read_excel(caminho_planilha)
+
+    etapa_tres_assinados = r"D:\Pastas - SharePoint\SP - PDV\eletronuclear.gov.br\PDV - Documentos\PDV 2024\Documentos\3 - Adesão\2 - Com assinatura"
+    arquivos = [arquivo for arquivo in os.listdir(etapa_tres_assinados) if arquivo != "desktop.ini"]
+
+    df_acompanhamento['etapa3'] = df_acompanhamento['etapa3'].fillna("").astype(str)
+
+    for arquivo in arquivos:
+        matricula = str(arquivo[2:8])
+
+        if matricula in df_acompanhamento["matricula"].astype(str).values:
+
+            indice = df_acompanhamento[df_acompanhamento['matricula'] == int(matricula)].index[0]
+
+            if df_acompanhamento.at[indice, 'etapa3'] == "":
+                df_acompanhamento.at[indice, 'etapa3'] = "Aguardando envio de email"
+                print(f"Matrícula {matricula} registrada na etapa 3\n")
+
+            elif df_acompanhamento.at[indice, 'etapa3'] == "Aguardando envio de email":
+                print(f'A matrícula {matricula} está aguardando o envio de email\n@@@@@@@@\n')
+
+            elif df_acompanhamento.at[indice, 'etapa3'] == "Email enviado":
+                pass
+
+        else:
+            print(f"Matrícula {matricula} não encontrada para o cadastramento da etapa 2\n")
+
+    df_acompanhamento.to_excel(caminho_planilha, index=False)
+    print('Etapa 3 finalizada\n')
+
