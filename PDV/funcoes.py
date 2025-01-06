@@ -121,3 +121,5 @@ def cadastrar_etapa3():
     df_acompanhamento.to_excel(caminho_planilha, index=False)
     print('Etapa 3 finalizada\n')
 
+def disparar_email():
+    pass
