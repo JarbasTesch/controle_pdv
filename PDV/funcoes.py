@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import win32com.client as win32
 
 usuario_ativo = os.getlogin()
 
@@ -122,5 +123,135 @@ def cadastrar_etapa3():
     df_acompanhamento.to_excel(caminho_planilha, index=False)
     print('Etapa 3 finalizada\n')
 
-def disparar_email():
-    pass
+def enviar_email_etapa1(): #adicionar , remetente
+
+    teste =  fr"C:\Users\{usuario_ativo}\Desktop\teste_disparo_email.xlsx"
+    df_teste = pd.read_excel(teste)
+    outlook = win32.Dispatch('outlook.application')
+    #caminho_planilha = fr"C:\Users\{usuario_ativo}\Desktop\acompanhamento_email_PDV.xlsx"
+    #df_acompanhamento = pd.read_excel(caminho_planilha)
+
+    #for i, linha in df_acompanhamento.iterrows():
+    for i, linha in df_teste.iterrows():
+        etapa1 = linha['etapa1']
+
+        if etapa1 == "Aguardando envio de email":
+
+            mail = outlook.CreateItem(0)
+
+            mail.To = linha['email']
+            mail.Subject = 'Etapa de Inscrição - PDV2024'
+            mail.HTMLBody = f"""
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Etapa de Inscrição - Conclusão</title>
+            </head>
+            <body>
+                <p><strong>Prezado(a) {linha['nome']},</strong></p>
+                <p>Informamos que a <strong>Etapa de Inscrição</strong> foi concluída com sucesso. Agradecemos pela sua dedicação até o momento. Agora, pedimos que aguarde o contato referente aos próximos passos.</p>
+                <p>Como parte do encerramento da Etapa de Inscrição, pedimos que preencha o formulário abaixo:</p>
+                <p><a href="https://forms.office.com/r/CURjbwz7ff"><strong>Formulário de Conclusão da Etapa de Inscrição</strong></a></p>
+                <p>O preenchimento é essencial para a continuidade do processo.</p>
+                <p>Agradecemos pela sua atenção e colaboração. Caso tenha alguma dúvida ou necessite de suporte, estamos à disposição.</p>
+            </body>
+            </html>                 
+            """
+
+            mail.Send()
+            df_teste.at[i, 'etapa1'] = "Enviado"
+            print(f"E-mail sobre etapa 1 enviado para {linha['email']} com sucesso!")
+
+    df_teste.to_excel(teste, index=False)
+
+def enviar_email_etapa2(): #adicionar , remetente
+
+    teste =  fr"C:\Users\{usuario_ativo}\Desktop\teste_disparo_email.xlsx"
+    df_teste = pd.read_excel(teste)
+    outlook = win32.Dispatch('outlook.application')
+    #caminho_planilha = fr"C:\Users\{usuario_ativo}\Desktop\acompanhamento_email_PDV.xlsx"
+    #df_acompanhamento = pd.read_excel(caminho_planilha)
+
+    #for i, linha in df_acompanhamento.iterrows():
+    for i, linha in df_teste.iterrows():
+        etapa1 = linha['etapa2']
+
+        if etapa1 == "Aguardando envio de email":
+
+            mail = outlook.CreateItem(0)
+
+            mail.To = linha['email']
+            mail.Subject = 'Etapa de Passagem de Conhecimento - PDV2024'
+            mail.HTMLBody = f"""
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            </head>
+            <body>
+                <p><strong>Prezado(a) {linha['nome']},</strong></p>
+                <p>Informamos que a <strong>Etapa de Passagem de conhecimento (TCGC)</strong> foi concluída com sucesso. Agradecemos pela sua dedicação e comprometimento durante o processo.</p>
+                <h3>Próximos passos:</h3>
+                <ul>
+                    <li>Caso ainda haja alguma pendência de assinatura relacionada à <strong>Etapa de Adesão</strong>, pedimos que aguarde o contato do departamento responsável.</li>
+                    <li>Se o documento de Adesão já foi assinado, consideramos o processo totalmente concluído.</li>
+                </ul>
+                <p>Agradecemos pela sua atenção e colaboração em cada etapa. Caso tenha dúvidas ou necessite de suporte, nossa equipe está à disposição para auxiliá-lo(a).</p>
+            </body>
+            </html>
+   
+            """
+
+            mail.Send()
+            df_teste.at[i, 'etapa2'] = "Enviado"
+            print(f"E-mail sobre etapa 2 enviado para {linha['email']} com sucesso!")
+
+    df_teste.to_excel(teste, index=False)
+
+def enviar_email_etapa3():  # adicionar , remetente
+
+    teste = fr"C:\Users\{usuario_ativo}\Desktop\teste_disparo_email.xlsx"
+    df_teste = pd.read_excel(teste)
+    outlook = win32.Dispatch('outlook.application')
+    # caminho_planilha = fr"C:\Users\{usuario_ativo}\Desktop\acompanhamento_email_PDV.xlsx"
+    # df_acompanhamento = pd.read_excel(caminho_planilha)
+
+    # for i, linha in df_acompanhamento.iterrows():
+    for i, linha in df_teste.iterrows():
+        etapa1 = linha['etapa3']
+
+        if etapa1 == "Aguardando envio de email":
+            mail = outlook.CreateItem(0)
+
+            mail.To = linha['email']
+            mail.Subject = 'Etapa de Adesão - PDV2024'
+            mail.HTMLBody = f"""
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            </head>
+            <body>
+                <p><strong>Prezado(a) {linha['nome']},</strong></p>
+                <p>Informamos que a <strong>Etapa de Adesão</strong> foi concluída com sucesso. Agradecemos pela sua dedicação e comprometimento durante o processo.</p>
+                <h3>Próximos passos:</h3>
+                <ul>
+                    <li>Caso ainda haja alguma pendência de assinatura relacionada à <strong>Etapa de Passagem de conhecimento (TCGC)</strong>, pedimos que aguarde o contato do departamento responsável.</li>
+                    <li>Se o documento de Passagem de Conhecimento já foi assinado, consideramos o processo totalmente concluído.</li>
+                </ul>
+                <p>Agradecemos pela sua atenção e colaboração em cada etapa. Caso tenha dúvidas ou necessite de suporte, nossa equipe está à disposição para auxiliá-lo(a).</p>
+            </body>
+            </html>
+
+
+            """
+
+            mail.Send()
+            df_teste.at[i, 'etapa3'] = "Enviado"
+            print(f"E-mail sobre etapa 3 enviado para {linha['email']} com sucesso!")
+
+    df_teste.to_excel(teste, index=False)
