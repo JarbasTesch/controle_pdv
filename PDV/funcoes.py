@@ -1,8 +1,10 @@
 import pandas as pd
 import os
 
+usuario_ativo = os.getlogin()
+
 def cadastrar_etapa1():
-    caminho_planilha = r"C:\Users\jbtesch\Desktop\acompanhamento_email_PDV.xlsx"
+    caminho_planilha = rf"C:\Users\{usuario_ativo}\Desktop\acompanhamento_email_PDV.xlsx"
     etapa_um_assinados = r"D:\Pastas - SharePoint\SP - PDV\eletronuclear.gov.br\PDV - Documentos\PDV 2024\Documentos\1 - Inscrição\2 - Com assinatura"
     df_acompanhamento = pd.read_excel(caminho_planilha)
 
@@ -22,10 +24,9 @@ def cadastrar_etapa1():
     df_acompanhamento.to_excel(caminho_planilha, index=False)
     print('Etapa 1 finalizada.\n')
 
-
 def incluir_informacoes():
-    caminho_planilha = r"C:\Users\jbtesch\Desktop\acompanhamento_email_PDV.xlsx"
-    consulta_informacoes = r"C:\Users\jbtesch\Desktop\consulta_email.xlsx"
+    caminho_planilha = rf"C:\Users\{usuario_ativo}\Desktop\acompanhamento_email_PDV.xlsx"
+    consulta_informacoes = rf"C:\Users\{usuario_ativo}\Desktop\consulta_email.xlsx"
 
     df_acompanhamento = pd.read_excel(caminho_planilha)
     df_informacoes = pd.read_excel(consulta_informacoes)
@@ -54,11 +55,11 @@ def incluir_informacoes():
             print(f"Matrícula {matricula} não encontrada em df_informacoes.\n")
 
 
-    df_acompanhamento.to_excel(r"C:\Users\jbtesch\Desktop\acompanhamento_email_PDV.xlsx", index=False)
+    df_acompanhamento.to_excel(fr"C:\Users\{usuario_ativo}\Desktop\acompanhamento_email_PDV.xlsx", index=False)
     print('Etapa de inclusão de informações finalizada')
 
 def cadastrar_etapa2():
-    caminho_planilha = r"C:\Users\jbtesch\Desktop\acompanhamento_email_PDV.xlsx"
+    caminho_planilha = fr"C:\Users\{usuario_ativo}\Desktop\acompanhamento_email_PDV.xlsx"
     df_acompanhamento = pd.read_excel(caminho_planilha)
     etapa_dois_assinados = r"D:\Pastas - SharePoint\SP - PDV\eletronuclear.gov.br\PDV - Documentos\PDV 2024\Documentos\2 - TCGC\1 - Com assinatura"
 
@@ -90,7 +91,7 @@ def cadastrar_etapa2():
     print('Etapa 2 finalizada\n')
 
 def cadastrar_etapa3():
-    caminho_planilha = r"C:\Users\jbtesch\Desktop\acompanhamento_email_PDV.xlsx"
+    caminho_planilha = fr"C:\Users\{usuario_ativo}\Desktop\acompanhamento_email_PDV.xlsx"
     df_acompanhamento = pd.read_excel(caminho_planilha)
 
     etapa_tres_assinados = r"D:\Pastas - SharePoint\SP - PDV\eletronuclear.gov.br\PDV - Documentos\PDV 2024\Documentos\3 - Adesão\2 - Com assinatura"
