@@ -76,7 +76,7 @@ def cadastrar_etapa2():
 
             if df_acompanhamento.at[indice, 'etapa2'] == "":
                 df_acompanhamento.at[indice, 'etapa2'] = "Aguardando envio de email"
-                print(f"Matrícula {matricula} registrada na etapa 2\n")
+                print(f"Matrícula {matricula} registrada na etapa 2\n ")
 
             elif df_acompanhamento.at[indice, 'etapa2'] == "Aguardando envio de email":
                 print(f'A matrícula {matricula} está aguardando o envio de email\n@@@@@@@@\n')
