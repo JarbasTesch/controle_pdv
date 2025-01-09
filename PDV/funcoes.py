@@ -140,6 +140,7 @@ def enviar_email_etapa1(): #adicionar , remetente
             mail = outlook.CreateItem(0)
 
             mail.To = linha['email']
+            mail.SentOnBehalfOfName = 'pdv2024@eletronuclear.gov.br'
             mail.Subject = 'Etapa de Inscrição - PDV2024'
             mail.HTMLBody = f"""
             <!DOCTYPE html>
@@ -183,6 +184,7 @@ def enviar_email_etapa2(): #adicionar , remetente
             mail = outlook.CreateItem(0)
 
             mail.To = linha['email']
+            mail.SentOnBehalfOfName = 'pdv2024@eletronuclear.gov.br'
             mail.Subject = 'Etapa de Passagem de Conhecimento - PDV2024'
             mail.HTMLBody = f"""
             <!DOCTYPE html>
@@ -227,6 +229,7 @@ def enviar_email_etapa3():  # adicionar , remetente
             mail = outlook.CreateItem(0)
 
             mail.To = linha['email']
+            mail.SentOnBehalfOfName = 'pdv2024@eletronuclear.gov.br'
             mail.Subject = 'Etapa de Adesão - PDV2024'
             mail.HTMLBody = f"""
             <!DOCTYPE html>
@@ -255,3 +258,10 @@ def enviar_email_etapa3():  # adicionar , remetente
             print(f"E-mail sobre etapa 3 enviado para {linha['email']} com sucesso!")
 
     df_teste.to_excel(teste, index=False)
+
+
+
+    #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#to do:
+        # substituir o caminho para o arquivo original, invés do teste.
+        # também substituir o remetente: botar o email do pdv2024.
