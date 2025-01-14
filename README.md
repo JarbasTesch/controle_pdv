@@ -30,8 +30,8 @@ Registers employees in the second stage ("TCGC") of the process, checking if doc
 ### `cadastrar_etapa3()`
 Registers employees in the third stage ("Adesão") of the process, similar to Stage 2, but for documents in a different directory. The status is updated based on the presence of documents.
 
-### `disparar_email()`
-This function is defined but still under development. It is intended to handle the process of sending emails to the employees, but it is not yet functional in the current version of the script.
+### `enviar_email_etapaX()`
+This function (and its variants) is responsible for sending an email notifying about the progress of the respective step. In other words, "send_email_step1" will handle sending emails related to the "step1" column.
 
 ## How to Use
 
