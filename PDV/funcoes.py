@@ -265,3 +265,6 @@ def enviar_email_etapa3():  # adicionar , remetente
 #to do:
         # substituir o caminho para o arquivo original, invés do teste.
         # também substituir o remetente: botar o email do pdv2024.
+
+            #aguardando a inclusão no email do pdv, para testar o envio manipulando o remetente
+            #se der certo, pode dar continuidade a "to do"
